@@ -1,14 +1,24 @@
 {
-  "name": "blog-app",
+  "name": "WeBlog",
   "version": "1.0.0",
-  "description": "Blog App",
-  "main": "index.js",
+  "description": "A simple blog website",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx tsc",
+    "start": "node dist/server.js",
+    "dev": "nodemon --watch './**/*.ts' --ignore 'client/*' --exec ts-node server.ts",
+    "format": "prettier --write . && cd client && prettier --write .",
+    "seeder": "node DBseeder/seeder.js",
+    "get-blogs-by-each-user": "ts-node DBseeder/dev-utils/get-blogs-by-each-user.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dhyey25/WeBlog.git"
   },
   "author": "Dhyey",
   "license": "ISC",
   "dependencies": {
+    "@huggingface/inference": "^4.13.5",
     "axios": "^1.13.2",
     "bcryptjs": "^3.0.3",
     "cloudinary": "^2.8.0",
@@ -26,11 +36,11 @@
     "natural": "^8.1.0",
     "node-wordnet": "^0.1.12",
     "nodemailer": "^7.0.10",
-    "uuid": "^13.0.0",
+    "uuid": "^9.0.1",
     "wndb-with-exceptions": "^3.0.2"
   },
   "devDependencies": {
-    "@faker-js/faker": "^10.1.0",
+    "@faker-js/faker": "^8.4.1",
     "@types/bcryptjs": "^3.0.0",
     "@types/cookie-parser": "^1.4.10",
     "@types/cors": "^2.8.19",
@@ -41,11 +51,22 @@
     "@types/node": "^24.10.1",
     "@types/nodemailer": "^7.0.4",
     "@types/uuid": "^11.0.0",
+    "autoprefixer": "^10.4.22",
     "dotenv": "^17.2.3",
     "google-auth-library": "^10.5.0",
     "node-cache": "^5.1.2",
     "nodemon": "^3.1.11",
+    "postcss": "^8.5.6",
     "prettier": "^3.6.2",
+    "tailwindcss": "^4.1.17",
     "ts-node": "^10.9.2"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": false,
+    "trailingComma": "all",
+    "jsxSingleQuote": false,
+    "tabWidth": 4,
+    "formatOnSave": true
   }
 }

@@ -1,6 +1,8 @@
 import { Request } from "express"
 import { v2 as cloudinary } from "cloudinary"
-import { v4 as uuidv4 } from "uuid"
+// @ts-ignore
+import { v4 as uuidv4 } from "uuid" 
+import dotenv from "dotenv"
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME, // Note: The doc uses CLOUDINARY_URL, but usually cloud_name/api_key/api_secret are preferred if not using the URL string. Check your .env setup later.

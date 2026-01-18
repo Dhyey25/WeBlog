@@ -1,6 +1,6 @@
 import { Schema, model, Types } from "mongoose"
 import bcrypt from "bcryptjs"
-import jwt from "jsonwebtoken"
+import jwt, { Secret, SignOptions } from "jsonwebtoken"
 import { IUser } from "../types/models"
 
 const UserSchema = new Schema<IUser>(
@@ -101,20 +101,30 @@ const preSave = async function (this: any, next: (err?: Error) => void) {
     }
 }
 
-UserSchema.pre("save", preSave)
+   // FIX: Removed 'next'. Async functions don't need it in modern Mongoose.
+    UserSchema.pre("save", async function () {
+    if (!this.isModified("password")) {
+        return
+    }
+    try {
+        const salt = await bcrypt.genSalt(5)
+        this.password = await bcrypt.hash(this.password, salt)
+    } catch (error: any) {
+        throw new Error(error)
+    }
+})
 
 UserSchema.path("myInterests").validate(function (value: any) {
     return value.length <= 8 
 }, "myInterests array exceeds the maximum allowed length")
 
 UserSchema.methods.generateToken = function () {
-    return jwt.sign(
-        { userId: this._id },
-        process.env.JWT_SECRET as jwt.Secret,
-        {
-            expiresIn: process.env.JWT_LIFETIME,
-        },
-    )
+    const secret: Secret = process.env.JWT_SECRET as jwt.Secret
+    const options: SignOptions = {
+        expiresIn: process.env.JWT_LIFETIME || "2d" as any,
+    }
+
+    return jwt.sign({ userId: this._id }, secret, options)
 }
 
 UserSchema.methods.comparePassword = async function (pswrd: string) {
