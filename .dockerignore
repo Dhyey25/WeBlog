@@ -1,2 +1,19 @@
+# Dependency directories (You already had this, which is good)
 **/node_modules/**
 **/.pnpm-store/**
+
+# Build artifacts (CRITICAL)
+# If you don't ignore these, your local build overwrites the Docker build
+dist
+client/dist
+build
+
+# Environment Secrets (SECURITY)
+# Never copy .env into the image. Let Render inject these variables.
+.env
+.env.local
+.env.production
+
+# Version control (Reduces build time)
+.git
+.gitignore
