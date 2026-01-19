@@ -88,12 +88,18 @@ app.use(
 app.use(paginateMW)
 
 //Routes
-app.use("/", express.static("./client/dist"))
+//app.use("/", express.static("./client/dist"))
+app.use(express.static(path.join(__dirname, "../client/dist")));
 app.use("/assets", express.static("./client/dist/assets"))
 app.use("/hello", (req: Request, res: Response) => {
     res.status(200).json({ message: "Hello World" })
 })
 app.use("/api/v1", ApiRoute)
+
+// Update the catch-all route too
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+});
 
 //Define Routes Here
 app.use("/*", express.static("./client/dist/index.html"))
