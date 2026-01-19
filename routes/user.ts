@@ -10,7 +10,7 @@ import {
     followUnfollowUser,
     isFollowing,
 } from "../controllers/user"
-import userBlogRouter from "./userBlog"
+import userBlogRouter from "./userblog"
 import { tokenLogin } from "../controllers/auth"
 
 const router = Router()
