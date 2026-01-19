@@ -2,9 +2,11 @@ import React from "react"
 import { useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { verification } from "../features/userSlice"
-import { MuiOtpInput } from "mui-one-time-password-input"
+import { MuiOtpInput as MuiOtpInputComponent } from "mui-one-time-password-input"
 import img from "../assets/img/Auth/otp.png"
 import Loader from "../components/Loader"
+
+const MuiOtpInput = MuiOtpInputComponent as any
 
 export default function SignUp(): JSX.Element {
   const dispatch = useAppDispatch()

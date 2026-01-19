@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
-import { MuiOtpInput } from "mui-one-time-password-input"
+import { MuiOtpInput as MuiOtpInputComponent} from "mui-one-time-password-input"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { loadUser } from "../features/userSlice"
+
+const MuiOtpInput = MuiOtpInputComponent as any
 
 const OTP = () => {
   const [otp, setOtp] = useState<string>("")
