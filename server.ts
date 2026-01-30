@@ -33,6 +33,11 @@ const server: http.Server = http.createServer(app)
 //Setting Environment
 const PORT: string | number = process.env.PORT || 5000
 app.set("trust proxy", 1)
+
+console.log("SERVER STARTED");
+console.log("__dirname is:", __dirname);
+console.log("Looking for client at:", path.resolve(__dirname, "../client/dist"));
+
 const allowedOrigins = [
     process.env.NODE_ENV === "production"
         ? (process.env.RENDER_EXTERNAL_URL as string)
