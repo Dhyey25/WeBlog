@@ -41,7 +41,7 @@ console.log("Looking for client at:", path.resolve(__dirname, "../client/dist"))
 const allowedOrigins = [
     process.env.NODE_ENV === "production"
         ? (process.env.RENDER_EXTERNAL_URL as string)
-        : "http://localhost:5173",
+        : "http://localhost:5173",  
 ]
 const corsOptions = {
     origin: function (origin: string | undefined, callback: any) {

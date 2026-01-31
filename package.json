@@ -2,7 +2,7 @@
   "name": "WeBlog",
   "version": "1.0.0",
   "description": "A simple blog website",
-  "main": "server.js",
+  "main": "server.ts",
   "scripts": {
     "build": "npx tsc",
     "start": "node dist/server.js",
