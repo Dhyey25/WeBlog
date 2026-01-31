@@ -105,7 +105,7 @@ const getTextSuggestion = async (req: Request, res: Response) => {
       messages: [
             { role: "user", content: text }
       ],
-        max_tokens: 200,
+        max_tokens: 300,
         temperature: 0.7,
         wait_for_model: true, // Wait for the model to load if it's not active
       });
